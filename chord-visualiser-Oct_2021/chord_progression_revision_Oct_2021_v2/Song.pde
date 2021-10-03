@@ -3,6 +3,9 @@
 // Analyse the chords of the song, re-jigg the array/make a new array.
 // -------------------------------------------------------------------
 
+Song song;
+int song_no; // the selected song index.
+
 
 class Song {
 
@@ -18,9 +21,9 @@ class Song {
   int[] bar_index;
   int[] c_bar; //how many chords in each bar.
   String[][] structured; // a 2D array of the chords, rows are bars, columns are chords.
-  int[][][] indexed; // the same 2D array but as indexed chord numbers.
+  int[][][] indexed; // the same 2D array but as indexed chord numbers. The third [] is any agumentations to the chord.
   // -------------------------
-  String song; // the name of the selected song without .txt suffix.
+  String song; // the name of the selected song.
   String root;  // key of the song
   int root_index; // index value of the key
   int total_bars; // how many bars in the song
@@ -45,7 +48,6 @@ class Song {
 
   // The functions
   // ...
-
 
   // -------------------------
   // Load the song
@@ -452,7 +454,7 @@ class Song {
             stroke(20);//stroke(220);
             float factor = 0.75; // closeness to first chord
             float factor_b = 0.75; // closeness to second chord
-            
+
             float delta_y = y_pos - prev_y_pos;
             float delta_x = x_pos-prev_x_pos;
             float alpha = atan(delta_y/delta_x);
@@ -534,13 +536,15 @@ class Song {
           }
 
           // the main chord
-          textSize(14);
+          textSize(13);
           fill(inv_text_col);
-          if (flat_sharp == 0) {
-            text(structured[b][c].substring(0, 1), x_pos - 0.5*extra_x, y_pos);
-          } else {
-            text(structured[b][c].substring(0, 2), x_pos - 0.5*extra_x - 0.5*flat_sharp, y_pos);
+          String chrd = chordsLookUp[indexed[b][c][0]];
+          float x_shift = 0;
+          if (chrd.length() == 2) { // i.e. it's a flatted or sharped chord. Cb, D#, etc.
+            x_shift = 0.5*flat_sharp;
+            println("X CORRECTION");
           }
+          text(chrd, x_pos - 0.5*extra_x - x_shift, y_pos);
 
           // ------------------------
           // Remember values for the next round ...
@@ -616,12 +620,6 @@ class Song {
     }
 
     noStroke();
-  }
-
-
-
-  // A function / transpose the song into a different key, if asked.
-  void transpose(int temp_key) {
   }
 
   // A function / select range of bars to show.

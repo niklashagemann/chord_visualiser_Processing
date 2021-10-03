@@ -3,11 +3,12 @@
 // Bundling all the music methods?
 // -------------------------------------------------------------------
 
+int transpose = 0; // +/- from the root.
+
+String[] chordsLookUp = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"};
+String[] chordsLookUp_alt = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
 class Music {
-
-  String[] chordsLookUp = {"C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"};
-  String[] chordsLookUp_alt = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
   Music () {
   }
@@ -16,7 +17,14 @@ class Music {
     // Receive a chord/note/key as a String. Return its index value within the octave.
     for (int i = 0; i < chordsLookUp.length; i ++) {
       if (chordsLookUp[i].equals(note) || chordsLookUp_alt[i].equals(note) ) {
-        return i; // chord position according to chord look up string i.e. C = 0, Db = 1, D = 2 ... etc.
+        int i_t = i + transpose;
+        if (i_t > 11) {
+          i_t = i_t - 12;
+        }
+        else if (i_t < 0) {
+          i_t = 12 + i_t;
+        }
+        return i_t; // chord position according to chord look up string i.e. C = 0, Db = 1, D = 2 ... etc.
       }
     }
     return -1;

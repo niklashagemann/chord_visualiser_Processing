@@ -1,12 +1,19 @@
+// Chord-visualiser app
+// Niklas Hagemann
+// ongoing ... 2021
+// ----------------------
+
+// PDF export
 import processing.pdf.*;
 boolean record = false;
 boolean started_recording = false;
 
-// -------------------------------------------------------------------
+
 // Did we receive a new song selection? Move into UI class ...
 boolean update = false, first_go = true;
-// -------------------------------------------------------------------
 
+
+// Colors, line weights etc.
 color bg_color = color(255);
 color text_col = color(0);
 color inv_text_col = color(0);
@@ -22,10 +29,8 @@ float arrow_thickness = 1.5;
 float bar_thickness = 1.5;
 color bar_color = color(220);
 
-
+// Font
 PFont f;
-Song song;
-int song_no;
 
 
 void setup() {
@@ -43,7 +48,7 @@ void setup() {
   size(1300, 560); // add /*, PDF, "filename.pdf"*/ in oder to export PDF, plus, uncomment the exit() line in the draw loop.
   f = createFont("Karla-Bold.ttf", 14, true); // DINPro-Medium.otf
   init_dropdown_list();
-  song_no = 4;
+  song_no = 0;
 }
 
 
@@ -83,6 +88,7 @@ void draw() {
 
 
     write_heading();
+    write_transpose();
 
     // -------------------------------------------------------------------
     // PART 3: Set booleans.
@@ -101,5 +107,40 @@ void draw() {
 void keyPressed() {
   if (key == 'p') {
     record = true;
+  }
+  if (key == '+' || key == '=') {
+    transpose(1);
+  }
+  if (key == '-') {
+    transpose(-1);
+  }
+  if (key == 'r') { // refresh
+    new_song_selected = true; // refresh!
+  }
+
+  if (key == CODED) {
+    if (key == UP) {
+      transpose(1);
+    }
+    if (key == DOWN) {
+      transpose(-1);
+    }
+  }
+}
+
+
+void transpose(int t) {
+  transpose += t;
+  transposeWrap();
+  println("new transpose" + transpose);
+  new_song_selected = true; // refresh!
+}
+
+void transposeWrap() {
+  if (transpose == 12) {
+    transpose = 0;
+  }
+  if (transpose == -12) {
+    transpose = 0;
   }
 }

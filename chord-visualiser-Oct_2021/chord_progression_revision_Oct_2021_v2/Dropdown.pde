@@ -16,6 +16,13 @@ void write_heading() {
   text("song:", menu_x+5, menu_y - 10);
 }
 
+
+void write_transpose() {
+  textSize(13);
+  String t = "transpose: " + transpose;
+  text(t, menu_x + 250, menu_y + 18);
+}
+
 void init_dropdown_list() {
   cp5 = new ControlP5(this);
   realbook = new Realbook();
