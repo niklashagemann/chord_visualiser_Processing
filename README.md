@@ -1,4 +1,4 @@
 # chord_visualiser_Processing
-Chord visualisation app coded in Processing
+Chord visualisation app coded in Processing/Java.
 
-(c) Niklas Hagemann, 2020.
+(c) Niklas Hagemann, 2021
