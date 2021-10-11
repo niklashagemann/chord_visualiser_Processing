@@ -9,8 +9,9 @@ boolean record = false;
 boolean started_recording = false;
 
 
-// Did we receive a new song selection? Move into UI class ...
-boolean update = false, first_go = true;
+// Did we receive a new song selection? Move into 'Dropdown' class ...
+//boolean update = false;
+boolean first_go = true;
 
 
 // Colors, line weights etc.
