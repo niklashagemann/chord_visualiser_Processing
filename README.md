@@ -1,7 +1,7 @@
 # chord-visualiser-Processing
 chord visualisation app coded in Processing/Java.
 
-[chords ~ Alone Together (Dm).pdf](https://github.com/niklashagemann/chord_visualiser_Processing/files/7741273/chords.Alone.Together.Dm.pdf)
+<img width="1395" alt="Alone Together (Dm)" src="https://user-images.githubusercontent.com/16756276/146685400-60385b38-30e0-4351-bc0c-bc015d4a8c69.png">
 
 More info: https://niklashagemann.cargo.site/Tactile-Dissonance
 
