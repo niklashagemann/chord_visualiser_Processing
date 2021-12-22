@@ -26,8 +26,8 @@ color augm_color = color(240, 200, 200);
 color transitions_color = color(0);
 color arrow_color = color(20);
 color foreground_color = color(220);
-color dash_color = color(220, 220, 220, 100);
-int dash_thickness = 2;
+color dash_color = color(220);
+float dash_thickness = 1.5;
 float bubble_border = 1.5;
 float arrow_thickness = 1.5;
 color bar_color = color(220);
@@ -39,7 +39,7 @@ PFont f;
 
 void setup() {
 
-  // read songnames into an array -----------------------------------
+  // read songnames into an array
   songname = fileNames(dataPath(""));
   Arrays.sort(songname); //sort alphabetically.
   println("There are " + songname.length + " songs in the folder.");
@@ -47,7 +47,6 @@ void setup() {
   for (int j=0; j<songname.length; j++) {
     println(songname[j]);
   }
-  // read songnames into an array -----------------------------------
 
   size(1300, 560); // add /*, PDF, "filename.pdf"*/ in oder to export PDF, plus, uncomment the exit() line in the draw loop.
   f = createFont("Karla-Bold.ttf", 14, true); // DINPro-Medium.otf
@@ -121,6 +120,7 @@ void keyPressed() {
   }
   if (key == 'r') { // refresh
     new_song_selected = true; // refresh!
+    record = true;
   }
 
   if (key == CODED) {
